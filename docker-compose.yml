@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  code-security-agent:
+    build: .
+    container_name: enterprise_code_security_agent
+    ports:
+      - "8501:8501"
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

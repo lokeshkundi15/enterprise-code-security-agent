@@ -1,0 +1,51 @@
+[
+  {
+    "id": "SEC-01",
+    "type": "SECURITY",
+    "expected_issue": true,
+    "expected_cwe": "CWE-89",
+    "diff": "diff --git a/db.py b/db.py\n+def get_user(uid):\n+    query = f\"SELECT * FROM users WHERE id = '{uid}'\"\n+    cursor.execute(query)"
+  },
+  {
+    "id": "SEC-02",
+    "type": "SECURITY",
+    "expected_issue": true,
+    "expected_cwe": "CWE-798",
+    "diff": "diff --git a/config.py b/config.py\n+API_SECRET = \"ghp_abcdef1234567890abcdef12345678901234\""
+  },
+  {
+    "id": "SEC-03",
+    "type": "SECURITY",
+    "expected_issue": true,
+    "expected_cwe": "CWE-798",
+    "diff": "diff --git a/client.py b/client.py\n+AUTH_HEADER = \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkw\""
+  },
+  {
+    "id": "QUAL-01",
+    "type": "CODE_QUALITY",
+    "expected_issue": true,
+    "expected_cwe": "ERROR_HANDLING",
+    "diff": "diff --git a/file_util.py b/file_util.py\n+def read_data(path):\n+    f = open(path, 'r')\n+    return f.read()"
+  },
+  {
+    "id": "QUAL-02",
+    "type": "CODE_QUALITY",
+    "expected_issue": true,
+    "expected_cwe": "ERROR_HANDLING",
+    "diff": "diff --git a/parse.py b/parse.py\n+def parse_val(val):\n+    try:\n+        return int(val)\n+    except:\n+        pass"
+  },
+  {
+    "id": "CLEAN-01",
+    "type": "CLEAN",
+    "expected_issue": false,
+    "expected_cwe": "NONE",
+    "diff": "diff --git a/math_util.py b/math_util.py\n+def add_numbers(a: int, b: int) -> int:\n+    \"\"\"Calculates sum of two integers.\"\"\"\n+    return a + b"
+  },
+  {
+    "id": "CLEAN-02",
+    "type": "CLEAN",
+    "expected_issue": false,
+    "expected_cwe": "NONE",
+    "diff": "diff --git a/formatter.py b/formatter.py\n+def to_uppercase(text: str) -> str:\n+    if not text:\n+        return \"\"\n+    return text.upper()"
+  }
+]
