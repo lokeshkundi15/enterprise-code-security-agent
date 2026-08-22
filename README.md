@@ -21,7 +21,7 @@ pinned: false
 
 ## 🌐 Live Application & Demo
 
-- **Live Interactive Dashboard:** Accessible locally via Streamlit (`streamlit run app/ui/dashboard.py`)
+- **Live Interactive Dashboard:** [Launch Streamlit App](https://enterprise-code-security-agent-vyqzhy7faqzhac3ocznoqm.streamlit.app/)
 - **API Documentation:** Accessible via FastAPI Swagger UI at `/docs`
 
 ---
