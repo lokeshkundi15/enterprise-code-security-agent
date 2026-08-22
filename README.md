@@ -24,7 +24,9 @@ pinned: false
 - **Live Interactive Dashboard:** [Launch Streamlit App](https://enterprise-code-security-agent-vyqzhy7faqzhac3ocznoqm.streamlit.app/)
 - **API Documentation:** Accessible via FastAPI Swagger UI at `/docs`
 
----
+## 🎬 Live Interactive Demo
+
+## ![Application Demo](assets/project_demo.gif)
 
 ## 1. Project Title
 
@@ -54,7 +56,7 @@ A production-grade, deterministic code review pipeline built with **LangGraph**,
 
 ## 5. 🏗️ System Architecture & Stateful Workflow
 
-````text
+```text
                [ GitHub Webhook / CLI Pull Request Ingestion ]
                                       │ (HMAC-SHA256 Sig & SQLite Idempotency Check)
                                       ▼
@@ -267,4 +269,4 @@ Engineering Decision: Instead of claiming that one retrieval strategy was best, 
 Production Safeguard: Retrieval quality is protected by an automated regression gate that fails tests when HitRate@2 or MRR falls below configured thresholds.
 
 Trade-off: The hybrid pipeline and cross-encoder improve retrieval precision but add latency. The evaluation benchmarks make this quality-versus-latency trade-off measurable.
-````
+```
