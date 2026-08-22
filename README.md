@@ -11,11 +11,11 @@ pinned: false
 
 # 🛡️ Enterprise Code Review & Security Agent
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://github.com/lokeshkundi15/enterprise-code-security-agent)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://enterprise-code-security-agent-vyqzhy7faqzhac3ocznoqm.streamlit.app/)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Tests Passing](https://img.shields.io/badge/tests-10%2F10%20passed-brightgreen.svg)]()
 [![Recall: 100%](<https://img.shields.io/badge/Recall-100%25%20(5%2F5)-brightgreen.svg>)]()
-[![FPR: 0.0%](https://img.shields.io/badge/FPR-0.0%25%20(0%20False%20Alarms)-blue.svg)]()
+[![FPR: 0.0%](<https://img.shields.io/badge/FPR-0.0%25%20(0%20False%20Alarms)-blue.svg>)]()
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/lokeshkundi15/enterprise-code-security-agent)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -54,7 +54,7 @@ A production-grade, deterministic code review pipeline built with **LangGraph**,
 
 ## 5. 🏗️ System Architecture & Stateful Workflow
 
-```text
+````text
                [ GitHub Webhook / CLI Pull Request Ingestion ]
                                       │ (HMAC-SHA256 Sig & SQLite Idempotency Check)
                                       ▼
@@ -271,3 +271,4 @@ Engineering Decision: Instead of claiming that one retrieval strategy was best, 
 Production Safeguard: Retrieval quality is protected by an automated regression gate that fails tests when HitRate@2 or MRR falls below configured thresholds.
 
 Trade-off: The hybrid pipeline and cross-encoder improve retrieval precision but add latency. The evaluation benchmarks make this quality-versus-latency trade-off measurable.
+````
