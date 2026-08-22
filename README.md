@@ -154,76 +154,72 @@ We evaluated different chunking strategies against the 50-question golden datase
 
 ## 14. Quickstart & Local Installation
 
-### 1. Clone Repository
+# 1. Clone Repository
+git clone [https://github.com/lokeshkundi15/enterprise-code-security-agent.git](https://github.com/lokeshkundi15/enterprise-code-security-agent.git)
+cd enterprise-code-security-agent
 
-```bash
-git clone https://github.com/lokeshkundi15/enterprise-knowledge-rag.git
-cd enterprise-knowledge-rag
-
-### 2. Setup Virtual Environment
-
+# 2. Setup Virtual Environment
 python -m venv venv
+venv\Scripts\activate  # On Linux/macOS: source venv/bin/activate
 
-venv\Scripts\activate
-
-source venv/bin/activate
-
-### 3. Install Dependencies
-
+# 3. Install Dependencies
 pip install -r requirements.txt
 
-### 4. Configure Environment
+# 4. Configure Environment Variables
+# Create .env file with your GROQ_API_KEY
+# GROQ_API_KEY=your_groq_api_key_here
+# WEBHOOK_SECRET=dev_webhook_secret_key
 
-cp .env.example .env
-Add your GROQ_API_KEY to the .env file.
+# 5. Run Benchmark Evaluation
+python evaluation/benchmark.py
 
-### 5. Run Chunking Experiments
-
-python evaluation/chunking_experiments.py
-
-### 6. Run Retrieval Evaluation Benchmark
-
-python evaluation/evaluate_retrieval.py
-
-### 7. Run Tests and Regression Quality Gate
-
+# 6. Run Pytest Regression Suite
 pytest -v
 
-### 8. Launch Interactive Dashboard
-
-streamlit run ui/dashboard.py
+# 7. Launch Streamlit Dashboard
+streamlit run app/ui/dashboard.py
 
 ## 15. Project Structure
 
-enterprise-knowledge-rag/
-├── data/
-│   ├── raw/                            # Enterprise Markdown Corpus
-│   └── chroma_db/                      # Persistent Chroma Vector Index
-├── chunking/
-│   └── chunker.py                      # Header-Aware Document Chunker
-├── embeddings/
-│   └── vector_store.py                 # ChromaDB Vector Store Manager
-├── retrieval/
-│   ├── bm25_search.py                  # Sparse Lexical BM25 Search
-│   └── hybrid_retriever.py             # Reciprocal Rank Fusion Engine
-├── reranking/
-│   └── reranker.py                     # Cross-Encoder Reranker
-├── generation/
-│   └── generator.py                    # Grounded LLM Generator & Citation Manager
-├── prompts/
-│   ├── rag_prompts.py                  # Prompt Template Base
-│   └── registry.py                     # Prompt Versioning Registry
+enterprise-code-security-agent/
+├── app/
+│   ├── api/
+│   │   ├── routes.py              # FastAPI Authenticated Webhook & Idempotency
+│   │   └── middleware.py          # HMAC Signature Verification
+│   ├── core/
+│   │   ├── config.py              # Pydantic Settings & Environment Loader
+│   │   ├── state.py               # LangGraph ReviewState Schema (TypedDict)
+│   │   ├── graph.py               # StateGraph Multi-Agent Orchestrator
+│   │   ├── chunker.py             # Diff Chunking & Lockfile Filter
+│   │   ├── aggregator.py          # Finding Deduplication & Severity Sorter
+│   │   └── logger.py              # Structlog JSON Audit Logger
+│   ├── agents/
+│   │   └── specialized_agents.py  # Security & Code Quality LLM Agents
+│   ├── mcp_server/
+│   │   ├── server.py              # FastMCP Server Instance
+│   │   └── tools/
+│   │       ├── ast_scanner.py     # Deterministic AST & Secret Rules
+│   │       └── diff_parser.py     # Unified Git Diff Parser
+│   ├── schemas/
+│   │   └── findings.py            # Pydantic Schemas (CodeFinding, ReviewReport)
+│   └── ui/
+│       └── dashboard.py           # Streamlit Human-in-the-Loop UI
 ├── evaluation/
-│   ├── golden_dataset.json             # 50-Question Benchmark Dataset
-│   ├── evaluate_retrieval.py           # Quantitative Retrieval Benchmark
-│   └── chunking_experiments.py         # Multi-Strategy Chunking Evaluator
+│   ├── dataset.json               # Golden Benchmark PR Dataset
+│   └── benchmark.py               # Automated Benchmark Suite Runner
 ├── tests/
-│   ├── test_rag_suite.py               # Pipeline Integration Tests
-│   └── test_retrieval_regression.py    # CI/CD Hard Quality Gate
-├── ui/
-│   └── dashboard.py                    # Streamlit Inspection Dashboard
-├── requirements.txt                    # Production Dependencies
-└── README.md                           # Project Documentation
+│   ├── test_schemas.py            # Pydantic Model Validation Tests
+│   ├── test_ast_tools.py          # AST & Diff Parser Unit Tests
+│   ├── test_graph_flow.py         # Full LangGraph Flow Tests
+│   ├── test_chunker.py            # Context Bounding & Filter Tests
+│   └── test_webhook.py            # FastAPI Idempotency & Route Tests
+├── Dockerfile                     # Production Container Specification
+├── docker-compose.yml             # Container Orchestration
+├── pytest.ini                     # Pytest Execution Configuration
+├── requirements.txt               # Locked Production Dependencies
+├── DECISIONS.md                   # Architecture Decision Records (ADR)
+├── EVALUATION.md                  # Benchmark Evaluation Results
+└── README.md                      # Project Documentation
 
 ## 16. Automated Quality Assurance & CI/CD Gate
 
